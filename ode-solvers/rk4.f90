@@ -4,17 +4,15 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Implement the 4th order Runge-Kutta method (RK4) 
 !             to solve differential equations
 !
 ! ERROR: O(dt^4) locally, O(dt^3) globally
 !
-! NOTES: This is a very efficient method because the local error 
-!        does not increase when expanding the integration interval.
-!        Requires an external subroutine [derivad] containing the 
-!        system of differential equations to be solved.
+! REQUIREMENTS : External Fortran Subroutine containing the system of
+!                diferential equations to be solved is required
 !
 ! INPUTS:
 !         ·t    : current time

@@ -4,20 +4,19 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Calculate the m-th order central moment, expected value 
 !             and standard deviation of a set of random numbers 
-!             distributed with a probability density
 !
 ! INPUTS:
-!         ·ndat  : number of data points
-!         ·xdata : array containing the data sample
-!         ·m     : order of the central moment to calculate
+!         ·ndat           : number of data points
+!         ·xdata          : array containing the data
+!         ·m              : order of the central moment to calculate
 !
 ! OUTPUTS:
-!         ·expected_x    : expected value (mean)
-!         ·moment_m    : m-th order central moment
+!         ·expected_x     : expected value
+!         ·moment_m       : m-th order central moment
 !         ·stnd_deviation : standard deviation (only if m=2, otherwise 0)
 !=================================================================
 

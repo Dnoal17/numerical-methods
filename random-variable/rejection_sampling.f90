@@ -4,24 +4,23 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Generate random numbers following a given probability 
 !             density function g(x) using the acceptance-rejection method
 !
+! NOTES:
+!         The probability density function must be defined (and normalized)
+!         in the same interval [a,b] where the numbers will be generated
+!
 ! INPUTS:
-!         ·ndat  : number of data points to generate
-!         ·fun   : probability density function (external function)
-!         ·a     : lower bound of the interval [a,b]
-!         ·b     : upper bound of the interval [a,b]
+!         ·ndat  : number of points to generate
+!         ·fun   : probability density function, defined as an external Fortran Function
+!         ·a,b   : interval endpoints
 !         ·M     : upper bound such that fun(x) <= M for all x in [a,b]
 !
 ! OUTPUTS:
 !         ·xnums : array containing the generated random numbers
-!
-! NOTES:
-!         The probability density function must be defined (and normalized)
-!         in the same interval [a,b] where the numbers will be generated
 !=================================================================
 
 SUBROUTINE SUBAIR(ndat, xnums, fun, a, b, M)

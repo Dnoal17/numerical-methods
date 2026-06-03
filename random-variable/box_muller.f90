@@ -4,20 +4,19 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Generate Gaussian random numbers N(0,1) using the 
 !             Box-Müller transformation method
 !
+! NOTES: To generate Gaussian numbers with other constants sigma, mu:
+!        N(mu,sigma) = sigma*N(0,1) + mu
+!
 ! INPUTS:
-!         ·ndat  : number of data points to generate
+!         ·ndat  : number of points to generate
 !
 ! OUTPUTS:
 !         ·xgaus : array containing the generated Gaussian numbers N(0,1)
-!
-! NOTES:
-!         To generate Gaussian numbers with other constants sigma, mu:
-!         N(mu,sigma) = sigma*N(0,1) + mu
 !=================================================================
 
 SUBROUTINE SUBGAUSS(ndat,xgaus)

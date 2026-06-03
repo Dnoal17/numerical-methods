@@ -4,7 +4,7 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Finding a root of f(x) = 0 using the secant method.
 !
@@ -15,7 +15,7 @@
 ! INPUTS:
 !         ·x0,x1    : points where the iteration begins
 !         ·fun      : defined as an external function [fun(x,f(x))]
-!         ·mwxiter  :aximum number of iterations permited
+!         ·mwxiter  : maximum number of iterations permited
 !         ·er_bound : desired error bound
 !
 ! OUTPUTS: 

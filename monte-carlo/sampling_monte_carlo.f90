@@ -4,24 +4,23 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
 ! OBJECTIVES: Integrating f(x) in N-dimensional interval through 
 !             the Monte Carlo algorithm with importance sampling
 !             using a probability density function
 !
+! REQUIREMENT: Density fucntion must be normalized
+!
 ! ERROR: The more similar the function and the probability density 
-!        are, the more efficient the method will be. The probability 
-!        density must be normalized in the integration interval.
-!        This method is very useful for integrating infinite domains 
-!        using Gaussian numbers.
+!        are, the more efficient the method will be.
 !
 ! INPUTS:
-!         ·dim     : integer that defines the number of dimensions
-!         ·N       : integer that defines the number of random points used
-!         ·fun     : function to integrate [fun(x)]
-!         ·density : probability density function for sampling [density(x)]
-!         ·nums    : array containing the random numbers (N x dim)
+!         ·dim     : integral dimension (integeer)
+!         ·N       : number of random points used each integration (integeer)
+!         ·fun     : function to be integrated defined as an external Fortran function [f(x)]
+!         ·density : probability density for sampling, defined as Fortran function [density(x)]
+!         ·nums    : matrix containing the random numbers (N x dim)
 !
 ! OUTPUTS: 
 !         ·integral : integral approximation

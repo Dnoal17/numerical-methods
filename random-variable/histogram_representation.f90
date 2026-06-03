@@ -4,20 +4,20 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
-! OBJECTIVES: Constructing a normalized histogram from a data set
-!             and estimating the statistical uncertainty of each bin
+! OBJECTIVES: Constructing a histogram from a data set and estimating 
+!             the statistical uncertainty of each bin
 !
 ! INPUTS:
-!         ·ndat  : number of data points
-!         ·xdata : array containing the data sample
-!         ·nbox  : number of histogram bins
+!         ·ndat     : number of data points
+!         ·xdata    : array containing the data sample
+!         ·nbox     : number of histogram bins
 !
 ! OUTPUTS:
 !         ·xhisto   : center of each histogram bin
 !         ·histo    : normalized histogram (probability density)
-!         ·errhisto : statistical uncertainty of each bin
+!         ·errhisto : estimated error of each bin
 !=================================================================
 
 SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
@@ -32,7 +32,7 @@ SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
     double precision, intent(out) :: xhisto(nbox), histo(nbox), errhisto(nbox)
 
     ! Internal Variables
-    integer :: i_caixa, i
+    integer :: i_box, i
     double precision :: x_min, x_max, h, p_i
     
     ! Determine the minimum and maximum values of the data sample
@@ -53,16 +53,16 @@ SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
         ! The maximum value must be treated separately to avoid
         ! assigning it to a non-existent bin
         if (xdata(i) .eq. x_max) then
-            i_caixa = nbox
+            i_box = nbox
 
         ! General case
         else
-            i_caixa = int((xdata(i)-x_min)/h) + 1
+            i_box = int((xdata(i)-x_min)/h) + 1
 
         endif
 
         ! Increase the counter of the corresponding bin
-        histo(i_caixa) = histo(i_caixa) + 1
+        histo(i_box) = histo(i_box) + 1
 
     enddo
 

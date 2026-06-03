@@ -4,18 +4,18 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
-! OBJECTIVES: Integrating f(x) in N-dimensional interval [a,b] 
-!             through the Monte Carlo algorithm
+! OBJECTIVES: Integrating f(x) in N-Dimensions using the Monte Carlo 
+!             algorithm
 !
-! ERROR: O(1/√N), with N the number of random points
+! ERROR: O(1/√N), with N the number of random points (N>>1)
 !                     
 ! INPUTS:
-!         ·a,b      : vectors that define the integration interval in N dimensions
-!         ·dim      : integer that defines the number of dimensions
-!         ·N        : an integer that defines the number of random points used
-!         ·fun     : defined as an external function [f(x)]
+!         ·a,b      : vectors defining the endpoints of all N integrals
+!         ·dim      : integral dimension (integeer)
+!         ·N        : number of random points used each integration(integeer)
+!         ·fun      : defined as an external Fortran function [f(x)]
 !
 ! OUTPUTS: 
 !         ·integral : integral aproximation

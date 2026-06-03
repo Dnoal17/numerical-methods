@@ -4,17 +4,17 @@
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com
 ! Date  : 2025
-! Repository: https://github.com/tuusuario/tu-repo
+! Repository: https://github.com/Dnoal17/numerical-methods.git
 !=================================================================
-! OBJECTIVES: Integrating f(x) in the interval [a,b] through the 
+! OBJECTIVES: Integrating f(x) in the interval [a,b] using the 
 !             Simpson algorithm
 !
 ! ERROR: O(h^4), with h the length of the subintervals 
 !                     
 ! INPUTS:
-!         ·a,b      : the points that define the integration interval
-!         ·k        : an integer that will define the number of subintervals used (N=2^k)
-!         ·f(x)     : defined as an external function [f(x)]
+!         ·a,b      : interval endpoints
+!         ·k        : integer used to calculate the number of subintervals used (N=2^k)
+!         ·f(x)     : defined as an external Fortran function [f(x)]
 !
 ! OUTPUTS: 
 !         ·integral : integral aproximation
