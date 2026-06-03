@@ -1,64 +1,89 @@
-!-------------------------------------------------------
-!MÈTODE DE MONTECARLO CRU (GENERALITZATS PER N-DINENSIÓ)
-!-------------------------------------------------------
+!=================================================================
+! MONTECARLO ALGORITHM
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Integrating f(x) in N-dimensional interval [a,b] 
+!             through the Monte Carlo algorithm
+!
+! ERROR: O(1/√N), with N the number of random points
+!                     
+! INPUTS:
+!         ·a,b vectors that define the integration interval in N dimensions
+!         ·dim integer that defines the number of dimensions
+!         ·N an integer that defines the number of random points used
+!         ·f(x) defined as an external function [fun(x)]
+!
+! OUTPUTS: 
+!         ·Integral aproximation
+!         ·Error estimation
+!=================================================================
 
-!Aquesta subrutina realitza integracions de Montecarlo i calcula l'error estimat per una integral de N-dimensions
-!El mètode de Montecarlo realitza les integrals aproximant-les al càlcul d'un valor esperat
-SUBROUTINE MONTECARLO_CRU(dim,N,fun,a,b,integral,error)
+SUBROUTINE CRUDE_MONTECARLO(dim,N,fun,a,b,integral,error)
 
-    IMPLICIT NONE
+    implicit none
 
-    integer :: k, j, N, dim
-    double precision :: a(dim), b(dim), x(N,dim), f(N)
-    double precision :: integral, lambda, error, xesperat, moment_2, sigma
-    double precision, external :: fun !Funció a integrar
+    ! Inputs
+    integer, intent(in) :: dim, N
+    double precision, intent(in) :: a(dim), b(dim)
+    external :: fun
 
-    !Inicialitzem les variables recursives i utilitzem el meu NIUB de llavor
+    ! Outputs
+    double precision, intent(out) :: integral, error
+
+    ! Internal Variables
+    double precision :: lambda, expected_x, moment_2, sigma
+    double precision :: x(N,dim), f(N)
+    integer :: k, j
+
+    ! Initialize the variables
     lambda = 1.0d0
     integral = 0.0d0
 
-    !Fem un bucle per calcular la integral generant N*dim números aleatoris
+    ! Generate N*dim random numbers
     do k=1,N
 
-        !Fem un bucle que omple les files de la matriu de DIM nombres aleatoris,
-        !cadascun generat uniformement en els seus intervals d'integració corresponents
+        ! Fill each row with dim random numbers uniformly distributed
         do j=1,dim
             x(k,j) = rand()
             x(k,j) = a(j) + (b(j) - a(j))*x(k,j)
         enddo
 
-        !El vector f guarda les imatges de cadascun dels punts
+        ! Save the images of each point
         f(k) = fun(x(k,:))
 
-        !Sumem totes les contribucions
+        ! Sum all contributions
         integral = integral + f(k)
 
     enddo
 
-    !Determinem a part els factors (b-a) que apareix a la teoria del mètode
+    ! Determine the (b-a) factor from the method theory
     do j=1,dim
         lambda = lambda*(b(j)-a(j))
     enddo
 
-    !Calculem l'aproximació de Montecarlo de la integral
+    ! Monte Carlo approximation of the integral
     integral = (lambda/N)*integral
 
-    !Calculem l'esperança i el segon moment
-    xesperat = 0.0d0
+    ! Calculate expectation and second moment
+    expected_x = 0.0d0
     moment_2  = 0.0d0
 
     do k=1,N
-        xesperat = xesperat + f(k)
+        expected_x = expected_x + f(k)
         moment_2  = moment_2  + f(k)**2
     enddo
 
-    xesperat = xesperat / N
+    expected_x = expected_x / N
     moment_2 = moment_2 / N
 
-    !Desviació típica de la variable aleatòria f(x)
-    sigma = dsqrt(moment_2 - xesperat**2)
+    ! Standard deviation of the random variable f(x)
+    sigma = dsqrt(moment_2 - expected_x**2)
 
-    !Error del mètode de Montecarlo: σ / √N multiplicat pel volum del domini
+    ! Error of the Monte Carlo method: σ/√N multiplied by the domain volume
     error = (lambda * sigma) / dsqrt(dble(N))
 
-END SUBROUTINE MONTECARLO_CRU
+END SUBROUTINE CRUDE_MONTECARLO

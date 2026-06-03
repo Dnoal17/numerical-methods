@@ -1,44 +1,73 @@
+!=================================================================
+! RUNGE-KUTTA 4 ALGORITHM
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Implement the 4th order Runge-Kutta method (RK4) 
+!             to solve differential equations
+!
+! ERROR: O(dt^4) locally, O(dt^3) globally
+!
+! NOTES: This is a very efficient method because the local error 
+!        does not increase when expanding the integration interval.
+!        Requires an external subroutine [derivad] containing the 
+!        system of differential equations to be solved.
+!
+! INPUTS:
+!         ·t    : current time
+!         ·dt   : time step
+!         ·yyin : input state vector (dimension nequs)
+!         ·nequs: number of equations (dimension of the system)
+!
+! OUTPUTS:
+!         ·yyout: output state vector after time dt
+!=================================================================
 
-!-------------
-!RUNGE–KUTTA 4
-!-------------
-
-!Aquesta subrutina implementa el mètode de RK4 per resoldre equacions diferencials.
-!És un mètode molt eficient perque té un error local i, doncs, l'error global no augmenta en augmentar l'interval d'integració
 SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, yyout)
 
     IMPLICIT NONE
 
-    integer :: nequs, i
-    double precision :: t, dt
-    double precision :: yyin(nequs), yyout(nequs), yaux(nequs)
+    ! Inputs
+    integer, intent(in) :: nequs
+    double precision, intent(in) :: t, dt
+    double precision, intent(in) :: yyin(nequs)
+
+    ! Outputs
+    double precision, intent(out) :: yyout(nequs)
+
+    ! Internal Variables
+    double precision :: yaux(nequs)
     double precision :: K(nequs,4)
+    integer :: i
 
-    !Calculem les K_i de l'algoritme RK4 ajudant-nos d'un vector auxiliar
-    !Necesitem una subrutina externa que contingui el sitema d'equacions diferencials que es vol resoldre
+    ! Calculate the K_i of the RK4 algorithm using an auxiliary vector
+    ! Requires an external subroutine containing the system of differential equations
 
-    !K1
+    ! K1
     call derivad(t, yyin, K(:,1), nequs)
 
-    !K2
+    ! K2
     do i=1,nequs
         yaux(i) = yyin(i) + 0.5d0*dt*K(i,1)
     end do
     call derivad(t+0.5d0*dt, yaux, K(:,2), nequs)
 
-    !K3
+    ! K3
     do i=1,nequs
         yaux(i) = yyin(i) + 0.5d0*dt*K(i,2)
     end do
     call derivad(t+0.5d0*dt, yaux, K(:,3), nequs)
 
-    !K4
+    ! K4
     do i=1,nequs
         yaux(i) = yyin(i) + dt*K(i,3)
     end do
     call derivad(t+dt, yaux, K(:,4), nequs)
 
-    !Calculem yyout utitlizant l'algoritme RK4
+    ! Calculate yyout using the RK4 algorithm
     do i=1,nequs
         yyout(i) = yyin(i) + (dt*(K(i,1)+2*K(i,2)+2*K(i,3)+K(i,4)))/6.0d0
     end do

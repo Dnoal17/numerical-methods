@@ -1,44 +1,76 @@
-!---------------------
-!MÈTODE DE LA BISECCIÓ
-!---------------------
+!=================================================================
+! BISECTION METHOD
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Finding a root of f(x) = 0 in the interval [A,B] 
+!             using the bisection method
+!
+! REQUIREMENTS: f(A)·f(B) < 0
+!
+! CONVERGENCE ORDER: The error in this method is bounded by the
+!                    number of iterations as: error <= (B-A)/2^n
+!                       
+! INPUTS:
+!         ·A,B
+!         ·f(x) defined as an external function [fun(x,f(x)]
+!         ·Error bound
+!
+! OUTPUTS: 
+!         ·Estimated root within the error range
+!         ·Number of iterations needed
+!=================================================================
 
-!Aquesta subrutina implementa el mètode de la bisecció per trobar arrels de funcions
-!Aquest, és un mètode comptacte: Troba una arrels sempre, encara que no sigui el més eficient
-SUBROUTINE BISECTION(A,B,eps,fun,niter,xarell)
+SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
 
-    IMPLICIT NONE
+    implicit none
 
-    double precision :: A, B, C, eps, xarell
-    double precision :: fA, dfA, fB, dfB, fC, dfC
-    integer :: niter, i
-    external :: fun !Funció a trobar les arrels, definida com a Subroutine
+    ! Inputs
+    double precision, intent(in) :: A, B, er_bound
+    external :: fun 
 
-    !Incialitzem els valors de fA,fB per iniciar l'algoritme
-    !Les variables dfA, dfB no fan res aquí, pero a la pràctica era convenient definir les funcions amb les derivades per reutilizar-les en altres mètodes
-    call fun(A,fA,dfA)
-    call fun(B,fB,dfB)
+    ! Output
+    double precision, intent(out) :: root
+    integer, intent(out) :: niter
 
-    !El mètode de la bisecció permet saber el nombre de passos necessàris per trobar una arrel amb precissió eps
-    !Això és possible perquè coneixem el tamany de l'interval en la n-éssima iteració (es redueix 1/2 amb cadascuna)
-    niter = int(dlog((B-A)/eps)/dlog(2.0d0)) + 1
+    ! Internal variables
+    double precision :: C
+    double precision :: fA, fB, fC
+    integer :: i
 
-    !Inciem l'algoritme comprobant que hi ha mínim una arrel en l'intèrval seleccionat (Th. Bolzano)
+    ! Inicialize f(B) and f(A)
+    call fun(A,fA)
+    call fun(B,fB)
+
+    ! Number of iterations needed to achieve the error bound
+    niter = int(dlog((B-A)/er_bound)/dlog(2.0d0)) + 1
+
+    ! Check the sign requirement is fulfilled
     if (fA*fB<0) then
 
+        ! BISECTION ALORITHM
+
+        ! Iterate for the previously calculated amount
         do i=1,niter
             
-            !Definim C i calculem la seva imatge
+            ! Define the midpoint of the interval and calculate its image
             C = (A+B)/2
-            call fun(C,fC,dfC)
+            call fun(C,fC)
 
-            !Continuem el mètode comprovant en quina partició de l'intèrval roman l'arrel
+            ! Find which new interval, [A,C] or [C,B], is the root in by checking where there is a change of sign
+
             if (fC*fA<0.0) then
 
+                ! Prepare the next iterations
                 B = C
                 fB = fC
 
             elseif (fC*fB<0.0) then
 
+                ! Prepare the next iterations
                 A = C
                 fA = fC
 
@@ -46,20 +78,20 @@ SUBROUTINE BISECTION(A,B,eps,fun,niter,xarell)
 
         enddo
 
-        !En acabar el mètode, agafem com arrel l'ultim valor de C
-        xarell = C
+        ! Take the last midpoint as the root estimation
+        root = C
 
-    !Si hem seleccionat malament els valors de fA i fB ho escribim per pantalla per assabentar-nos
+    ! If the input does not fulfill the requirement notify the reasson why 
     elseif (fA*fB>0) then
-        write(*,*) "NO HI HA CANVIA DE SIGNE ENTRE A =", A, "I B =", B
+        write(*,*) "ERROR: Both A =", A, " and B =", B "have the same sign"
 
-    !Potser encertem l'arrel en donar els extrems de l'intèrval i ja hem acabat (poc probable)
+    ! It may be the case where A or B are the root themselves
     elseif (fA == 0.0) then
             C = A
-            xarell = C
+            root = C
     elseif (fB ==0.0) then
             C = B
-            xarell = C
+            root = C
     endif
 
     RETURN

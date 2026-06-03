@@ -1,32 +1,62 @@
+!=================================================================
+! 0 ORDER INTERPOLATION
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Interpolating f(x) at order 0 from a set of points 
+!             {(xi,fi)}
+!                       
+! INPUTS:
+!         ·X,F(X) two vectors containing the points in a matching increasing order
+!         ·x the point where f(x) is to be interpolated
+!
+! OUTPUTS: 
+!         ·f(x) 0 order interpolation of f at point x
+!=================================================================
 
-!----------------------
-!INTERPOLACIÓ D'ORDRE 0
-!----------------------
+SUBROUTINE INTERPOLATION_0(x, fx, Xi, Fi)
 
-!Aquesta subrutina retorna el valor interpolat d'ordre 0 d'un punt x(t) donada un conjunt de fi(xi)
-SUBROUTINE XINTERPO0(t, x, npts)
+    implicit none
 
-    IMPLICIT NONE
+    ! Inputs
+    double precision, intent(in) :: x
+    double precision, intent(in) :: Xi(:), Fi(:)
 
+    ! Outputs
+    double precision, intent(out) :: fx
+
+    ! Internal variables
     integer :: i, npts
-    real :: t, x
-    real :: TI(npts), XI(npts)
 
-    !S'espera que els vectors TI i XI tinguin el conjunt de temps i posicions de la funció a interpolar (podrian posar-se com arguments)
-    COMMON /DADES/ TI, XI
+    ! Check both vectors have the same dimension
+    if (size(Xi) .eq. size(Fi)) then
 
-    !La interpolació és d'ordre 0, és a dir, es dona al punt interpolat el valor del punt inmediatament anterior
-    !Calculem entre quins punt està i hi assignem el valor corresponent
+        ! Iterate through Xi
+        npts = size(xi)
+        do i = 1, npts-1
 
-    do i = 1, npts-1
-        if (t .ge. TI(i) .and. t .le. TI(i+1)) then
+            ! Find within which points x lies
+            if (x .ge. Xi(i) .and. x .le. Xi(i+1)) then
 
-            !Interpolació
-            x = XI(i)
+                ! Interpolation at order 0
+                fx = Fi(i)
 
-        endif
-    enddo
+                exit
+
+            endif
+
+        enddo
+
+    ! Error when input vectors dimension does not match
+    else
+
+        write(*,*) "ERROR: The dimension of the input arrays does not match"
+
+    endif
 
     RETURN
 
-END SUBROUTINE XINTERPO0
+END SUBROUTINE INTERPOLATION_0

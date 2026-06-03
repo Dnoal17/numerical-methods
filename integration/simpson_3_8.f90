@@ -1,47 +1,73 @@
+!=================================================================
+! SIMPSON 3/8 ALGORITHM
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Integrating f(x) in the interval [a,b] through the
+!             Simpson 3/8 algorithm
+!
+! ERROR: O(h^4), with h the length of the subintervals
+!
+! INPUTS:
+!         ·a,b the points that define the integration interval
+!         ·k an integer that will define the number of subintervals used
+!            (N=3·2^k)
+!         ·f(x) defined as an external function [fun(x)]
+!
+! OUTPUTS:
+!         ·Integral aproximation
+!=================================================================
 
-!---------------------
-!MÈTODE DE SIMPSOM 3/8
-!---------------------
+SUBROUTINE SIMPSON38(a,b,k,fun,integral)
 
-!Aquest és un mètode d'integració numèrica familia dels mètodes de Simpsom
-!El nombre d'intèrvals en aplicar el mètode ha de ser MÚLTIPLE DE 3 SÍ O SÍ 
-SUBROUTINE METODESIMPSON38(x1, x2, k, funcio, resul)
+    implicit none
 
-    IMPLICIT NONE
+    ! Inputs
+    double precision, intent(in) :: a,b
+    integer, intent(in) :: k
+    external :: fun
 
-    double precision :: x1, x2, resul, h, x, suma
-    integer :: k, i, N
-    double precision, external :: funcio
+    ! Outputs
+    double precision, intent(out) :: integral
 
-    !Calculem N com un múltiple de 3
-    !Fem 3^k intervals per garantir que sigui múltiple de 3
-    !Alternativa: N = 3*2**k seria més flexible
-    N = 3 * 2**k
-    h = (x2 - x1)/dble(N)
-    suma = 0.0d0
+    ! Internal Variables
+    double precision :: h, x, sum
+    integer :: i, N
 
-    do i = 0, N
+    ! Inicialize the variables
+    sum = 0.0d0
+    N = 3*2**k
+    h = (b-a)/dble(N)
 
-        x = x1 + h*i
+    ! Iterate through the number of subintervals
+    do i=0,N
 
-        !Extrems de l'interval tenen pes 1
+        ! Define the points
+        x = a + h*dble(i)
+
+        ! SIMPSON 3/8 ALGORITHM
+
+        ! Contribution of the endpoints
         if (i == 0 .or. i == N) then
-            suma = suma + funcio(x)
+            sum = sum + fun(x)
 
-        !Si l'índex és múltiple de 3 i no és extrem, factor 2
+        ! Contribution of points labled by multiple of 3
         else if (mod(i,3) == 0) then
-            suma = suma + 2.0d0 * funcio(x)
+            sum = sum + 2.0d0*fun(x)
 
-        !La resta dels punts tenen factor 3
+        ! Contribution of the remaining points
         else
-            suma = suma + 3.0d0 * funcio(x)
+            sum = sum + 3.0d0*fun(x)
         endif
 
     enddo
 
-    !Multiplicació final pel factor 3h/8
-    resul = suma * (3.0d0*h/8.0d0) !Error O(h**4)
+    ! Integral estimation
+    integral = sum*(3.0d0*h/8.0d0)
 
     RETURN
 
-END SUBROUTINE METODESIMPSON38
+END SUBROUTINE SIMPSON38

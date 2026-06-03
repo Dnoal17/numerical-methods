@@ -1,30 +1,57 @@
+!=================================================================
+! EULER METHOD
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Apply Euler's method to solve differential equations 
+!             as a system of equations
+!
+! ERROR: O(h), with h the step size
+!
+! NOTES: Requires external functions that contain the information 
+!        of the system of equations
+!
+! INPUTS:
+!         ·N    : number of points
+!         ·y    : initial conditions array (N x nvar)
+!         ·fun  : external function containing the system of equations 
+!                 with the derivatives of the ODE
+!         ·a    : starting point of the interval
+!         ·b    : ending point of the interval
+!         ·nvar : number of variables in the system
+!
+! OUTPUTS:
+!         ·y    : solution array (updated with the numerical solution)
+!=================================================================
 
-!--------------------
-!MÈTODE D'EULER BÀSIC
-!--------------------
+SUBROUTINE EULER_METHOD(N, y, fun, a, b, nvar)
 
-!Subrutina que aplica el mètode d'Euler per resoldre equacions diferencials plantejant-les com un sistema d'equacions
-!Requeries funcions externes que continguin la informació del sistema d'equacions
-SUBROUTINE METODE_EULER(N, y, fun, a, b, nvar)
+    implicit none
 
-    IMPLICIT NONE
+    ! Inputs
+    integer, intent(in) :: N, nvar
+    double precision, intent(in) :: a, b
+    double precision, intent(inout) :: y(N, nvar)
+    external :: fun
 
-    integer :: i, j, N, nvar
-    double precision :: a, b, h, t
-    double precision :: y(N, nvar)
-    double precision, external :: fun !Fun conté un sistema d'equacions amb les derivades de la EDO
+    ! Internal Variables
+    double precision :: h, t
+    integer :: i, j
 
-    !Determinem el pas h
+    ! Determine the step h
     h = (b - a)/dble(N - 1)
 
-    !Utilitzem l'algoritme del mètode de Euler. Comencem el bucle en i=2 perquè partim de les condicions inicials
+    ! Apply Euler's algorithm. Start the loop at i=2 because we start from initial conditions
     do i = 2, N
 
-        !Calculem el valor de la variable independent per cada iteració
+        ! Calculate the value of the independent variable for each iteration
         t = a + h*dble(i-2)
 
-        !Actualitzem cada variable del sistema d'equacions diferencials. 
-        !La variable j té la funció de canviar d'equació dins el sistema d'equacions, permetent resoldre equacions de segon ordre (que són les que ens interesen)
+        ! Update each variable of the differential equation system
+        ! The variable j serves to change the equation within the system, allowing second order equations to be solved (which are the ones we are interested in)
         do j = 1, nvar
 
             y(i,j) = y(i-1,j) + h * fun(t, y(i-1,:), j)
@@ -35,4 +62,4 @@ SUBROUTINE METODE_EULER(N, y, fun, a, b, nvar)
 
     RETURN
 
-END SUBROUTINE METODE_EULER
+END SUBROUTINE EULER_METHOD

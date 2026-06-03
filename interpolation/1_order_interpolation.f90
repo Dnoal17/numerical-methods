@@ -1,39 +1,66 @@
-! Method: Linear interpolation
-! Input: t, time and position arrays
-! Output: interpolated value x(t)
+!=================================================================
+! LINEAR INTERPOLATION
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Interpolating f(x) at first order from a set of points 
+!             {(xi,fi)}
+!                       
+! INPUTS:
+!         ·X,F(X) two vectors containing the points in a matching increasing order
+!         ·x the point where f(x) is to be interpolated
+!
+! OUTPUTS: 
+!         ·f(x) linear interpolation of f at point x
+!=================================================================
 
-!-------------------
-!INTERPOLACIÓ LINEAL
-!-------------------
+SUBROUTINE LINEAR_INTERPOLATION(x, fx, Xi, Fi)
 
-!Aquesta subrutina retorna el valor interpolat linealment d'un punt x(t) donada un conjunt de fi(xi)
-SUBROUTINE XINTERPO(t, x, npts)
+    implicit none
 
-    IMPLICIT NONE
+    ! Inputs
+    double precision, intent(in) :: x
+    double precision, intent(in) :: Xi(:), Fi(:)
 
+    ! Outputs
+    double precision, intent(out) :: fx
+
+    ! Internal variables
     integer :: i, npts
-    real :: t, x
-    real :: TI(npts), XI(npts)
+    double precision :: m, n
 
-    real :: m, n
+    ! Check both vectors have the same dimension
+    if (size(Xi) .eq. size(Fi)) then
 
-    !S'espera que els vectors TI i XI tinguin el conjunt de temps i posicions de la funció a interpolar (podrian posar-se com arguments)
-    COMMON /DADES/ TI, XI
+        ! Iterate through Xi
+        npts = size(Xi)
+        do i = 1, npts-1
 
-    !La interpolació és lineal, és a dir, es situa el punt interpolat sobre la recta que uneix els dos punts més propers
-    !Calculem quins són aquest punts i fem la recta
-    do i = 1, npts-1
-        if (t .ge. TI(i) .and. t .le. TI(i+1)) then
+            ! Find within which points x lies
+            if (x .ge. Xi(i) .and. x .le. Xi(i+1)) then
 
-            m = (XI(i+1) - XI(i)) / (TI(i+1) - TI(i))
-            n = XI(i) - m*TI(i)
+                ! Linear interpolation (slope and intercept)
+                m = (Fi(i+1) - Fi(i)) / (Xi(i+1) - Xi(i))
+                n = Fi(i) - m*Xi(i)
 
-            !Interpolació
-            x = m*t + n
+                ! Interpolated value
+                fx = m*x + n
 
-        endif
-    enddo
+                exit
+
+            endif
+
+        enddo
+
+    else
+
+        write(*,*) "ERROR: The dimension of the input arrays does not match"
+
+    endif
 
     RETURN
 
-END SUBROUTINE XINTERPO
+END SUBROUTINE LINEAR_INTERPOLATION

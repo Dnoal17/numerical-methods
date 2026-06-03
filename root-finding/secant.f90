@@ -1,67 +1,90 @@
-!-------------------
-!MÈTODE DE LA SECANT
-!-------------------
+!=================================================================
+! SECANT METHOD
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Finding a root of f(x) = 0 using the secant method.
+!
+! REQUIREMENTS: abs(f(x1)-f(x0)) being not to close to zero
+!
+! CONVERGENCE ORDER: Superlineal convergence near the root
+!                       
+! INPUTS:
+!         ·x0,x1 the points where the iteration begins
+!         ·f(x) defined as an external function [fun(x,f(x))]
+!         ·Maximum number of iterations permited
+!         ·Error bound
+!
+! OUTPUTS: 
+!         ·Estimated root within the error range
+!         ·Number of iterations needed
+!=================================================================
 
-!Aquesta subrutina implementa el mètode de la secant per trobar arrels de funcions
-!Aquest mètode és més eficient que la bisecció i menys que Newton Raphson, però s'ha de tenir cura d'implementar-lo en punts amb derivades suficientment diferents de 0
-!Si la recta tangent és molt horitzontal (df(x0) ~ 0) el mètode no convergeix
-SUBROUTINE SECANT(x0,x1,eps,fun,niter,xarell)
 
-    IMPLICIT NONE
+SUBROUTINE SECANT(x0,x1,er_bound,fun,niter,root,maxiter)
 
-    double precision :: x0, x1, eps, xarell
-    double precision :: f0, f1, df0, df1
-    double precision :: x, xprev, dif
-    integer :: niter, maxiter = 1000, i
-    external :: fun   !Funció a trobar les arrels, definida com a Subroutine
+    implicit none
+    
+    ! Inputs
+    double precision, intent(in) :: x0, x1, er_bound
+    integer, intent(in) :: maxiter
+    external :: fun 
 
-    !Inicialitzem el comptador d'iteracions
+    ! Output
+    double precision, intent(out) :: root
+    integer, intent(out) :: niter
+
+    ! Internal variables
+    double precision :: f0, f1, x, xprev, dif
+    integer :: i
+
+    ! Inicialize the variables
     niter = 0
-
-    !Inicialitzem els dos primers punts del mètode
     xprev = x0
     x = x1
+    root = x1
+    dif = 1.0d6 ! This variable controls the error convergence, so it is inicialized in a big number to allow the algorithm to begin 
 
-    !Inicialitzem la diferència entre iteracions amb un valor gran
-    dif = 1.0d6
-
-    !Bucle principal amb nombre màxim d'iteracions
+    ! The method can diverge, so a maximum iteration number will be defined in order to stop it
     do i = 1, maxiter
 
-        !Calculem les imatges de la funció als dos punts
-        call fun(xprev, f0, df0)
-        call fun(x, f1, df1)
+        ! Calculate f(x1) and f(x0) each iteration
+        call fun(xprev,f0)
+        call fun(x,f1)
 
-        !Comprovem que el denominador no sigui massa petit
+        ! Check the method will not diverge
         if (abs(f1 - f0) < 1.0d-13) then
-            write(*,*) "ERROR: Denominador molt petit en el mètode de la secant"
-            EXIT
 
-        !Comprovem si ja hem assolit la precisió desitjada
-        elseif (dif < eps) then
+            write(*,*) "ERROR: Divergence error "
 
             EXIT
 
-        else
+        endif
 
-            !Algoritme del mètode de la secant
-            xarell = x - f1 * (x - xprev) / (f1 - f0)
+        ! SECANT ALGORITHM
+        root = x - f1 * (x - xprev) / (f1 - f0)
+        dif = abs(x - root)
 
-            !Calculem la diferència entre iteracions consecutives
-            dif = abs(x - xarell)
+        ! Prepare the next iteration
+        xprev = x
+        x = root
+        niter = niter + 1
 
-            !Preparem la següent iteració
-            xprev = x
-            x = xarell
-            niter = niter + 1
+        ! Check if the error bound has been achieved
+        if (dif < er_bound) then
+
+            EXIT
 
         endif
 
     enddo
 
-    !Si el mètode no convergeix en el nombre màxim d'iteracions
-    if (i == maxiter .and. dif > eps) then
-        write(*,*) "S'ha arribat al nombre màxim d'iteracions permeses, no s'ha assolit la precisió desitjada"
+    ! If the method could not converge within the maximum number of iterations send an error message
+    if (i == maxiter .and. dif > er_bound) then
+        write(*,*) "ERROR: Maximum number of iterations was reached without achieving the error bound"
     endif
 
     RETURN

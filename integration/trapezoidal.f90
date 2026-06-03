@@ -1,40 +1,68 @@
-!--------------------
-!MÈTODE DELS TRAPEZIS
-!--------------------
+!=================================================================
+! TRAPEZOIDAL ALGORITHM
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Integrating f(x) in the interval [a,b] through the
+!             Trapezoidal algorithm
+!
+! ERROR: O(h^2), with h the length of the subintervals
+!
+! INPUTS:
+!         ·a,b the points that define the integration interval
+!         ·k an integer that will define the number of subintervals used (N=2^k)
+!         ·f(x) defined as an external function [fun(x)]
+!
+! OUTPUTS:
+!         ·Integral aproximation
+!=================================================================
 
-!Aquest és un mètode d'integració numèrica aproximant l'àrea sota la corba d'una funció amb trapezis i calculant les seves àreas
-SUBROUTINE METODETRAPEZIS(x1,x2,k,funcio,resul)
+SUBROUTINE TRAPEZOIDAL(a,b,k,fun,integral)
 
-    IMPLICIT NONE
+    implicit none
 
-    double precision :: x1, x2,resul, h, x, suma
-    integer :: k, i, N
-    double precision, external :: funcio !Funció a integrar
+    ! Inputs
+    double precision, intent(in) :: a,b
+    integer, intent(in) :: k
+    double precision, external :: fun
 
-    !Tamany dels intervals i inicialització de la suma
-    N = 2**k !Fem particions de 2**k intervals perque el mètode convergeixi
-    h = (x2-x1)/dble(N)
-    suma = 0.0d0
+    ! Outputs
+    double precision, intent(out) :: integral
 
+    ! Internal Variables
+    double precision :: h, x, sum
+    integer :: i, N
+
+    ! Inicialize the variables
+    sum = 0.0d0
+    N = 2**k
+    h = (b-a)/dble(N)
+
+    ! Iterate through the number of subintervals
     do i=0,N
 
-        x = x1 + h*i
+        ! Define the points
+        x = a + h*dble(i)
 
-        !El pes dels extrems és la meitat que la resta de punts
+        ! TRAPEZOIDAL ALGORITHM
+
+        ! Contribution of the endpoints
         if (i == 0 .or. i == N) then
+            sum = sum + 0.5d0*fun(x)
 
-            suma = suma + funcio(x)/2
-
+        ! Contribution of interior points
         else
-
-            suma = suma + funcio(x)
-
+            sum = sum + fun(x)
         endif
 
     enddo
 
-    resul = suma*h !Obtenim el valor de la integral (Error O(h**2))
+    ! Integral estimation
+    integral = sum*h
 
     RETURN
 
-END SUBROUTINE METODETRAPEZIS
+END SUBROUTINE TRAPEZOIDAL

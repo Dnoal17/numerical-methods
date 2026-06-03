@@ -1,64 +1,85 @@
-!-------------------------------------------------------
-!MÈTODE DE MONTECARLO CRU (GENERALITZATS PER N-DINENSIÓ)
-!-------------------------------------------------------
+!=================================================================
+! MONTECARLO SAMPLING ALGORITHM
+!=================================================================
+! Author: Daniel Noal Pineda
+! Email : noaldaniel41@gmail.com
+! Date  : 2025
+! Repository: https://github.com/tuusuario/tu-repo
+!=================================================================
+! OBJECTIVES: Integrating f(x) in N-dimensional interval through 
+!             the Monte Carlo algorithm with importance sampling
+!             using a probability density function
+!
+! INPUTS:
+!         ·dim     : integer that defines the number of dimensions
+!         ·N       : integer that defines the number of random points used
+!         ·fun     : function to integrate [fun(x)]
+!         ·density: probability density function for sampling [density(x)]
+!         ·nums    : array containing the random numbers (N x dim)
+!
+! OUTPUTS: 
+!         ·Integral approximation
+!         ·Error estimation
+!
+! NOTE: The more similar the function and the probability density 
+!       are, the more efficient the method will be. The probability 
+!       density must be normalized in the integration interval.
+!       This method is very useful for integrating infinite domains 
+!       using Gaussian numbers.
+!=================================================================
 
-!Aquesta subrutina realitza integracions de Montecarlo i calcula l'error estimat per una integral de N-dimensions
-!El mètode de Montecarlo realitza les integrals aproximant-les al càlcul d'un valor esperat
-SUBROUTINE MONTECARLO_CRU(dim,N,fun,a,b,integral,error)
+SUBROUTINE SAMPLING_MONTECARLO(dim,N,fun,density,nums,integral,error)
 
-    IMPLICIT NONE
+    implicit none
 
-    integer :: k, j, N, dim
-    double precision :: a(dim), b(dim), x(N,dim), f(N)
-    double precision :: integral, lambda, error, xesperat, moment_2, sigma
-    double precision, external :: fun !Funció a integrar
+    ! Inputs
+    integer, intent(in) :: dim, N
+    double precision, intent(in) :: nums(N,dim)
+    external :: fun, density
 
-    !Inicialitzem les variables recursives i utilitzem el meu NIUB de llavor
-    lambda = 1.0d0
+    ! Outputs
+    double precision, intent(out) :: integral, error
+
+    ! Internal Variables
+    double precision :: expected_x, moment_2, sigma
+    double precision :: f(N), g(N)
+    integer :: i
+
+    ! Initialize the variables
     integral = 0.0d0
 
-    !Fem un bucle per calcular la integral generant N*dim números aleatoris
-    do k=1,N
+    ! Save the images of the function and the density
+    do i=1,N
 
-        !Fem un bucle que omple les files de la matriu de DIM nombres aleatoris,
-        !cadascun generat uniformement en els seus intervals d'integració corresponents
-        do j=1,dim
-            x(k,j) = rand()
-            x(k,j) = a(j) + (b(j) - a(j))*x(k,j)
-        enddo
+        f(i) = fun(nums(i,:))
+        g(i) = density(nums(i,:))
 
-        !El vector f guarda les imatges de cadascun dels punts
-        f(k) = fun(x(k,:))
-
-        !Sumem totes les contribucions
-        integral = integral + f(k)
+        ! Sum contributions according to Monte Carlo with sampling method
+        integral = integral + f(i)/g(i)
 
     enddo
 
-    !Determinem a part els factors (b-a) que apareix a la teoria del mètode
-    do j=1,dim
-        lambda = lambda*(b(j)-a(j))
-    enddo
+    ! Final determination of the integral
+    integral = integral/N
 
-    !Calculem l'aproximació de Montecarlo de la integral
-    integral = (lambda/N)*integral
-
-    !Calculem l'esperança i el segon moment
-    xesperat = 0.0d0
+    ! Calculate expectation and second moment
+    expected_x = 0.0d0
     moment_2  = 0.0d0
 
-    do k=1,N
-        xesperat = xesperat + f(k)
-        moment_2  = moment_2  + f(k)**2
+    do i=1,N
+        expected_x = expected_x + (f(i)/g(i))
+        moment_2  = moment_2  + (f(i)/g(i))**2
     enddo
 
-    xesperat = xesperat / N
+    expected_x = expected_x / N
     moment_2 = moment_2 / N
 
-    !Desviació típica de la variable aleatòria f(x)
-    sigma = dsqrt(moment_2 - xesperat**2)
+    ! Standard deviation of the random variable f(x)
+    sigma = dsqrt(moment_2 - expected_x**2)
 
-    !Error del mètode de Montecarlo: σ / √N multiplicat pel volum del domini
-    error = (lambda * sigma) / dsqrt(dble(N))
+    ! Error of the Monte Carlo method: σ/√N
+    error = sigma / dsqrt(dble(N))
 
-END SUBROUTINE MONTECARLO_CRU
+    RETURN
+
+END SUBROUTINE MONTECARLO_SAMPLEIG
