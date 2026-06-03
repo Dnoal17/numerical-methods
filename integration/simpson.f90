@@ -12,12 +12,12 @@
 ! ERROR: O(h^4), with h the length of the subintervals 
 !                     
 ! INPUTS:
-!         ·a,b the points that define the integration interval
-!         ·k an integer that will define the number of subintervals used (N=2^k)
-!         ·f(x) defined as an external function [fun(x)]
+!         ·a,b      : the points that define the integration interval
+!         ·k        : an integer that will define the number of subintervals used (N=2^k)
+!         ·f(x)     : defined as an external function [f(x)]
 !
 ! OUTPUTS: 
-!         ·Integral aproximation
+!         ·integral : integral aproximation
 !=================================================================
 
 SUBROUTINE SIMPSON(a,b,k,fun,integral)

@@ -10,11 +10,11 @@
 !             {(xi,fi)}
 !                       
 ! INPUTS:
-!         ·X,F(X) two vectors containing the points in a matching increasing order
-!         ·x the point where f(x) is to be interpolated
+!         ·X,Fi : two vectors containing the points in a matching increasing order
+!         ·x    : the point where f(x) is to be interpolated
 !
 ! OUTPUTS: 
-!         ·f(x) 0 order interpolation of f at point x
+!         ·fx   : 0 order interpolation of f at point x
 !=================================================================
 
 SUBROUTINE INTERPOLATION_0(x, fx, Xi, Fi)

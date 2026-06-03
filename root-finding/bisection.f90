@@ -15,13 +15,13 @@
 !                    number of iterations as: error <= (B-A)/2^n
 !                       
 ! INPUTS:
-!         ·A,B
-!         ·f(x) defined as an external function [fun(x,f(x)]
-!         ·Error bound
+!         ·A,B      : the points that define the integration interval
+!         ·f(x)     : defined as an external function [fun(x,f(x)]
+!         ·er_bound : desired error bound
 !
 ! OUTPUTS: 
-!         ·Estimated root within the error range
-!         ·Number of iterations needed
+!         ·root     : estimated root within the error bound
+!         ·niter    : number of iterations needed
 !=================================================================
 
 SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)

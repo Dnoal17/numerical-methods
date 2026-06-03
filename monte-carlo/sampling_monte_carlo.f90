@@ -10,22 +10,22 @@
 !             the Monte Carlo algorithm with importance sampling
 !             using a probability density function
 !
+! ERROR: The more similar the function and the probability density 
+!        are, the more efficient the method will be. The probability 
+!        density must be normalized in the integration interval.
+!        This method is very useful for integrating infinite domains 
+!        using Gaussian numbers.
+!
 ! INPUTS:
 !         ·dim     : integer that defines the number of dimensions
 !         ·N       : integer that defines the number of random points used
 !         ·fun     : function to integrate [fun(x)]
-!         ·density: probability density function for sampling [density(x)]
+!         ·density : probability density function for sampling [density(x)]
 !         ·nums    : array containing the random numbers (N x dim)
 !
 ! OUTPUTS: 
-!         ·Integral approximation
-!         ·Error estimation
-!
-! NOTE: The more similar the function and the probability density 
-!       are, the more efficient the method will be. The probability 
-!       density must be normalized in the integration interval.
-!       This method is very useful for integrating infinite domains 
-!       using Gaussian numbers.
+!         ·integral : integral approximation
+!         ·error    : error estimation
 !=================================================================
 
 SUBROUTINE SAMPLING_MONTECARLO(dim,N,fun,density,nums,integral,error)

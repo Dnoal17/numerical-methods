@@ -17,8 +17,7 @@
 ! INPUTS:
 !         ·N    : number of points
 !         ·y    : initial conditions array (N x nvar)
-!         ·fun  : external function containing the system of equations 
-!                 with the derivatives of the ODE
+!         ·fun  : external function containing the system of equations with the derivatives of the ODE
 !         ·a    : starting point of the interval
 !         ·b    : ending point of the interval
 !         ·nvar : number of variables in the system

@@ -12,14 +12,14 @@
 ! ERROR: O(1/√N), with N the number of random points
 !                     
 ! INPUTS:
-!         ·a,b vectors that define the integration interval in N dimensions
-!         ·dim integer that defines the number of dimensions
-!         ·N an integer that defines the number of random points used
-!         ·f(x) defined as an external function [fun(x)]
+!         ·a,b      : vectors that define the integration interval in N dimensions
+!         ·dim      : integer that defines the number of dimensions
+!         ·N        : an integer that defines the number of random points used
+!         ·fun     : defined as an external function [f(x)]
 !
 ! OUTPUTS: 
-!         ·Integral aproximation
-!         ·Error estimation
+!         ·integral : integral aproximation
+!         ·error    : error estimation
 !=================================================================
 
 SUBROUTINE CRUDE_MONTECARLO(dim,N,fun,a,b,integral,error)

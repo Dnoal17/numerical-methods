@@ -13,14 +13,14 @@
 ! CONVERGENCE ORDER: Superlineal convergence near the root
 !                       
 ! INPUTS:
-!         ·x0,x1 the points where the iteration begins
-!         ·f(x) defined as an external function [fun(x,f(x))]
-!         ·Maximum number of iterations permited
-!         ·Error bound
+!         ·x0,x1    : points where the iteration begins
+!         ·fun      : defined as an external function [fun(x,f(x))]
+!         ·mwxiter  :aximum number of iterations permited
+!         ·er_bound : desired error bound
 !
 ! OUTPUTS: 
-!         ·Estimated root within the error range
-!         ·Number of iterations needed
+!         ·root     : estimated root within the error range
+!         ·niter    : number of iterations needed
 !=================================================================
 
 
