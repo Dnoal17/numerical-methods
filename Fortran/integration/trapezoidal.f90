@@ -14,7 +14,7 @@
 ! INPUTS:
 !         ·a,b      : interval endpoints
 !         ·k        : integer used to calculate the number of subintervals used (N=2^k)
-!         ·fun     : defined as an external Fortran function [fun(x)]
+!         ·fun      : defined as an external Fortran function [fun(x)]
 !
 ! OUTPUTS: 
 !         ·integral : integral aproximation

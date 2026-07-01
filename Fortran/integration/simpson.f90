@@ -1,5 +1,5 @@
 !=================================================================
-! SIMPON ALGORITHM
+! SIMPSON ALGORITHM
 !=================================================================
 ! Author: Daniel Noal Pineda
 ! Email : noaldaniel41@gmail.com

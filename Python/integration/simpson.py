@@ -1,29 +1,28 @@
 #=================================================================
-# TRAPEZOIDAL ALGORITHM
+# SIMPSON ALGORITHM
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
 # Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
-# OBJECTIVES: Integrating f(x) in the interval [a,b] using the
-#             trapezoidal rule
+# OBJECTIVES: Integrating f(x) in the interval [a,b] using the 
+#             Simpson algorithm
 #
-# ERROR: O(h^2), where h is the step size
-#
+# ERROR: O(h^4), with h the length of the subintervals 
+#                     
 # INPUTS:
-#         ·a, b   : interval endpoints
-#         ·k      : determines number of subintervals (N = 2^k)
-#         ·fun    : 1 variable - callable function (NumPy-compatible)
+#         ·a,b      : interval endpoints
+#         ·k        : integer used to calculate the number of subintervals used (N=2^k)
+#         ·fun      : 1 variable - callable function (NumPy-compatible)
 #
-# OUTPUT:
-#         ·integral : approximation of the integral
+# OUTPUTS: 
+#         ·integral : integral aproximation
 #=================================================================
 
 import numpy as np
 
-
-def trapezoidal(a, b, k, fun):
+def simpson(a, b, k, fun):
 
     # Initialize the variables
     N = 2**k
@@ -32,6 +31,6 @@ def trapezoidal(a, b, k, fun):
     Y = fun(X)
 
     # Integral approximation
-    integral = h * (0.5 * (Y[0] + Y[-1]) + np.sum(Y[1:-1]))
+    integral = (h / 3) * (Y[0] + Y[-1] + 4 * np.sum(Y[1:-1:2]) + 2 * np.sum(Y[2:-1:2]))
 
     return integral
