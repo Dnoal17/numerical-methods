@@ -65,7 +65,7 @@ SUBROUTINE SIMPSON(a,b,k,fun,integral)
     enddo
 
     ! Integral estimation
-    integral = sum*(h/3.0d0)
+    integral = sum * (h/3.0d0)
 
     RETURN
 
