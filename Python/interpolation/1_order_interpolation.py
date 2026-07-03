@@ -32,7 +32,7 @@ def linear_interpolation(Xi, Fi, x):
         # Error message if x is not within the interval of points being considered
         if x < Xi[0] or Xi[npts - 1] < x:
 
-            print('x is not within the interval conskidered')
+            print('x is not within the interval considered')
 
             return
 

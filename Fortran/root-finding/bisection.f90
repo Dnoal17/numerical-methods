@@ -16,15 +16,15 @@
 !                       
 ! INPUTS:
 !         ·A,B      : the points that define the integration interval
-!         ·fun      : defined as an external function [fun(x,f(x)]
+!         ·fun      : defined as an external function [fun(x,f(x))]
 !         ·er_bound : desired error bound
 !
 ! OUTPUTS: 
 !         ·root     : estimated root within the error bound
-!         ·niter    : number of iterations needed
+!         ·n_iter    : number of iterations needed
 !=================================================================
 
-SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
+SUBROUTINE BISECTION(A,B,er_bound,fun,n_iter,root)
 
     implicit none
 
@@ -34,7 +34,7 @@ SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
 
     ! Output
     double precision, intent(out) :: root
-    integer, intent(out) :: niter
+    integer, intent(out) :: n_iter
 
     ! Internal variables
     double precision :: C
@@ -46,7 +46,7 @@ SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
     call fun(B,fB)
 
     ! Number of iterations needed to achieve the error bound
-    niter = int(dlog((B-A)/er_bound)/dlog(2.0d0)) + 1
+    n_iter = int(dlog((B-A)/er_bound)/dlog(2.0d0)) + 1
 
     ! Check the sign requirement is fulfilled
     if (fA*fB<0) then
@@ -54,7 +54,7 @@ SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
         ! BISECTION ALORITHM
 
         ! Iterate for the previously calculated amount
-        do i=1,niter
+        do i=1,n_iter
             
             ! Define the midpoint of the interval and calculate its image
             C = (A+B)/2
@@ -85,7 +85,7 @@ SUBROUTINE BISECTION(A,B,er_bound,fun,niter,root)
     elseif (fA*fB>0) then
         write(*,*) "ERROR: Both A =", A, " and B =", B "have the same sign"
 
-    ! It may be the case where A or B are the root themselves
+    ! It may be the case that A or B are the root themselves
     elseif (fA == 0.0) then
             C = A
             root = C
