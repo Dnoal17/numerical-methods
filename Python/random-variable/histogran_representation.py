@@ -10,8 +10,7 @@
 #             the statistical uncertainty of each bin
 #
 # INPUTS:
-#         ·n_data     : number of data points
-#         ·x_data    : numpy array array containing the data sample
+#         ·x_data    : numpy array containing the data sample
 #         ·n_box     : number of histogram bins
 #
 # OUTPUTS:
@@ -22,7 +21,7 @@
 
 import numpy as np
 
-def histogram(n_data, x_data, n_box):
+def histogram(x_data, n_box):
 
     # Determine the minimum and maximum values of the data sample
     x_min = np.min(x_data)
@@ -32,9 +31,12 @@ def histogram(n_data, x_data, n_box):
     h = (x_max - x_min) / n_box
 
     # Initialize all output arrays
-    x_histo = np.empty(n_box)
+    x_histo = np.linspace(x_min + h/2, x_max - h/2, n_box)    
     histo = np.zeros(n_box)
     err_histo = np.zeros(n_box)
+
+    # Calculate the number of points for further use
+    n_data = x_data.size
 
     # Identify the bin corresponding to each data point
     for i in range(n_data):
@@ -50,17 +52,11 @@ def histogram(n_data, x_data, n_box):
         # Increase the counter of the corresponding bin
         histo[i_box] += 1
 
-    # Compute the histogram properties
-    for i in range(n_box):
+    # Normalize the histogram to obtain a probability density
+    histo = histo / (n_data * h)
 
-        # Compute the center of each bin
-        x_histo[i] = x_min + (i + 0.5) * h
-
-        # Normalize the histogram to obtain a probability density
-        histo[i] = histo[i] / (n_data * h)
-
-        # Estimate the statistical uncertainty assuming binomial statistics in each bin
-        p_i = histo[i] * h
-        err_histo[i] = np.sqrt(p_i * (1.0 - p_i) / n_data) / h
+    # Estimate the statistical uncertainty assuming binomial statistics in each bin
+    p_i = histo * h
+    err_histo = np.sqrt(p_i * (1.0 - p_i) / n_data) / h
 
     return x_histo, histo, err_histo
