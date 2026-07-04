@@ -16,7 +16,7 @@
 #                       
 # INPUTS:
 #         ·A,B      : the points that define the integration interval
-#         ·fun      : 1 variable - callable function (NumPy-compatible)
+#         ·fun      : 1 variable - callable function 
 #         ·er_bound : desired error bound
 #
 # OUTPUTS: 

@@ -15,7 +15,7 @@
 #                       
 # INPUTS:
 #         ·x0       : the point where the iteration begins
-#         ·fun      : 1D variable - callable function (NumPy-compatible) with output (f(x),f'(x)) in a tuple
+#         ·fun      : 1D variable - callable function with output (f(x),f'(x)) in a tuple
 #         ·max_iter : maximum number of iterations permited
 #         ·er_bound : desired error bound
 #

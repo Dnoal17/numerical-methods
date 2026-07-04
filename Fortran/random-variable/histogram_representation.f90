@@ -50,8 +50,7 @@ SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
     ! Identify the bin corresponding to each data point
     do i=1,ndat
 
-        ! The maximum value must be treated separately to avoid
-        ! assigning it to a non-existent bin
+        ! The maximum value must be treated separately to avoid assigning it to a non-existent bin
         if (xdata(i) .eq. x_max) then
             i_box = nbox
 
