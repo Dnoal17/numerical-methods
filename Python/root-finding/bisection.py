@@ -16,7 +16,7 @@
 #                       
 # INPUTS:
 #         ·A,B      : the points that define the integration interval
-#         ·fun      : defined as an external function [fun(x,f(x)]
+#         ·fun      : 1 variable - callable function (NumPy-compatible)
 #         ·er_bound : desired error bound
 #
 # OUTPUTS: 
@@ -27,7 +27,7 @@ import numpy as np
 
 def bisection(A, B, er_bound, fun):
 
-    # Inicialize the values of the images at the endpoints of the interval
+    # Initialize the values of the images at the endpoints of the interval
     fA = fun(A)
     fB = fun(B)
 
@@ -37,7 +37,7 @@ def bisection(A, B, er_bound, fun):
     # Check the sign requirement is fulfilled
     if (fA * fB < 0):
         
-        for i in range (n_iter + 1):
+        for i in range (n_iter):
             
             # Calculate the midpoint, C, and the image
             C = (A + B) / 2

@@ -36,7 +36,7 @@ SUBROUTINE SIMPSON(a,b,k,fun,integral)
     double precision :: h, x, sum
     integer :: i, N
 
-    ! Inicialize the variables
+    ! Initialize the variables
     sum = 0.0d0
     N = 2**k
     h = (b-a)/dble(N)

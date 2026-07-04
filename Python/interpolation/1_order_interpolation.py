@@ -39,7 +39,7 @@ def linear_interpolation(Xi, Fi, x):
         else:
 
             # Find withing which two points does x lie
-            for i in range(0, npts - 1):  
+            for i in range(npts - 1):  
 
                 if Xi[i] < x < Xi[i+1]:
 

@@ -15,7 +15,7 @@
 ! INPUTS:
 !         ·x0,x1    : points where the iteration begins
 !         ·fun      : defined as an external function [fun(x,f(x))]
-!         ·mwxiter  : maximum number of iterations permited
+!         ·maxiter  : maximum number of iterations permited
 !         ·er_bound : desired error bound
 !
 ! OUTPUTS: 
@@ -41,12 +41,12 @@ SUBROUTINE SECANT(x0,x1,er_bound,fun,niter,root,maxiter)
     double precision :: f0, f1, x, xprev, dif
     integer :: i
 
-    ! Inicialize the variables
+    ! Initialize the variables
     niter = 0
     xprev = x0
     x = x1
     root = x1
-    dif = 1.0d6 ! This variable controls the error convergence, so it is inicialized in a big number to allow the algorithm to begin 
+    dif = 1.0d6 ! This variable controls the error convergence, so it is initialized in a big number to allow the algorithm to begin 
 
     ! The method can diverge, so a maximum iteration number will be defined in order to stop it
     do i = 1, maxiter
