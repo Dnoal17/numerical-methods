@@ -21,10 +21,10 @@
 !         ·nequs: number of equations (dimension of the system)
 !
 ! OUTPUTS:
-!         ·yyout: output state vector after time dt
+!         ·y_out: output state vector after time dt
 !=================================================================
 
-SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, yyout)
+SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, y_out)
 
     IMPLICIT NONE
 
@@ -34,7 +34,7 @@ SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, yyout)
     double precision, intent(in) :: yyin(nequs)
 
     ! Outputs
-    double precision, intent(out) :: yyout(nequs)
+    double precision, intent(out) :: y_out(nequs)
 
     ! Internal Variables
     double precision :: yaux(nequs)
@@ -65,9 +65,9 @@ SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, yyout)
     end do
     call derivad(t+dt, yaux, K(:,4), nequs)
 
-    ! Calculate yyout using the RK4 algorithm
+    ! Calculate y_out using the RK4 algorithm
     do i=1,nequs
-        yyout(i) = yyin(i) + (dt*(K(i,1)+2*K(i,2)+2*K(i,3)+K(i,4)))/6.0d0
+        y_out(i) = yyin(i) + (dt*(K(i,1)+2*K(i,2)+2*K(i,3)+K(i,4)))/6.0d0
     end do
 
     RETURN
