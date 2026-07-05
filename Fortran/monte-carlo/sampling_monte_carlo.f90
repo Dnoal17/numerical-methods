@@ -27,7 +27,7 @@
 !         ·error    : error estimation
 !=================================================================
 
-SUBROUTINE SAMPLING_MONTECARLO(dim,N,fun,density,nums,integral,error)
+subroutine sampling_montecarlo(dim, N, fun, density, nums, integral, error)
 
     implicit none
 
@@ -79,6 +79,6 @@ SUBROUTINE SAMPLING_MONTECARLO(dim,N,fun,density,nums,integral,error)
     ! Error of the Monte Carlo method: σ/√N
     error = sigma / dsqrt(dble(N))
 
-    RETURN
+    return
 
-END SUBROUTINE MONTECARLO_SAMPLEIG
+end subroutine sampling_montecarlo

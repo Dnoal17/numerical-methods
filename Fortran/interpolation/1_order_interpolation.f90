@@ -17,7 +17,7 @@
 !         ·fx   : 1st order interpolation of f at point x
 !=================================================================
 
-SUBROUTINE LINEAR_INTERPOLATION(x, fx, Xi, Fi)
+subroutine linear_interpolation(x, fx, Xi, Fi)
 
     implicit none
 
@@ -61,6 +61,6 @@ SUBROUTINE LINEAR_INTERPOLATION(x, fx, Xi, Fi)
 
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE LINEAR_INTERPOLATION
+end subroutine linear_interpolation

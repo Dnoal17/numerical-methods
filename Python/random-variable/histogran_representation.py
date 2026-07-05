@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Constructing a histogram from a data set and estimating 
@@ -14,9 +14,9 @@
 #         ·n_box     : number of histogram bins
 #
 # OUTPUTS:
-#         ·xhisto   : center of each histogram bin
-#         ·histo    : normalized histogram (probability density)
-#         ·errhisto : estimated error of each bin
+#         ·xhisto    : center of each histogram bin
+#         ·histo     : normalized histogram (probability density)
+#         ·errhisto  : estimated error of each bin
 #=================================================================
 
 import numpy as np

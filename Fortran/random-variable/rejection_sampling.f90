@@ -23,9 +23,9 @@
 !         ·xnums : array containing the generated random numbers
 !=================================================================
 
-SUBROUTINE SUBAIR(ndat, xnums, fun, a, b, M)
+subroutine acceptance_rejection(ndat, xnums, fun, a, b, M)
 
-    IMPLICIT NONE
+    implicit none
 
     integer :: ndat, i
     double precision :: M, a, b, x, p, xnums(ndat)
@@ -60,6 +60,6 @@ SUBROUTINE SUBAIR(ndat, xnums, fun, a, b, M)
 
     enddo
 
-    RETURN
+    return
 
-END SUBROUTINE SUBAIR
+end subroutine acceptance_rejection

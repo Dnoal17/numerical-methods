@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Apply Improved Euler's method to solve differential equations 
@@ -12,12 +12,12 @@
 # ERROR: O(h), with h the step size
 #
 # INPUTS:
-#         ·y    : initial conditions array (N x nvar)
+#         ·y     : initial conditions array (N x nvar)
 #         ·fun   : external numpy-compatible function containing the system of diferential equations to be solved
-#         ·a,b  : interval endpoints
+#         ·a,b   : interval endpoints
 #
 # OUTPUTS:
-#         ·y    : solution array (updated with the numerical solution)
+#         ·y     : solution array (updated with the numerical solution)
 #=================================================================
 
 import numpy as np

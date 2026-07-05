@@ -20,7 +20,7 @@
 !         ·stnd_deviation : standard deviation (only if m=2, otherwise 0)
 !=================================================================
 
-SUBROUTINE MOMENT_ORDER_M(ndat, xdata, m, expected_x, moment_m, stnd_deviation)
+subroutine moment_order_m(ndat, xdata, m, expected_x, moment_m, stnd_deviation)
     
     implicit none
 
@@ -63,6 +63,6 @@ SUBROUTINE MOMENT_ORDER_M(ndat, xdata, m, expected_x, moment_m, stnd_deviation)
         stnd_deviation = 0.0d0
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE MOMENT_ORDER_M
+end subroutine MOMENT_ORDER_M

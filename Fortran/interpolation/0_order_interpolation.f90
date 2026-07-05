@@ -17,7 +17,7 @@
 !         ·fx   : 0 order interpolation of f at point x
 !=================================================================
 
-SUBROUTINE INTERPOLATION_0(x, fx, Xi, Fi)
+subroutine interpolation_0(x, fx, Xi, Fi)
 
     implicit none
 
@@ -57,6 +57,6 @@ SUBROUTINE INTERPOLATION_0(x, fx, Xi, Fi)
 
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE INTERPOLATION_0
+end subroutine interpolation_0

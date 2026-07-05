@@ -12,12 +12,12 @@
 # ERROR: O(h^4), with h the length of the subintervals 
 #                     
 # INPUTS:
-#         ·a,b      : interval endpoints
-#         ·k        : integer used to calculate the number of subintervals used (N=2^k)
-#         ·fun      : 1 variable - callable function (NumPy-compatible)
+#         ·a,b       : interval endpoints
+#         ·k         : integer used to calculate the number of subintervals used (N=2^k)
+#         ·fun       : 1 variable - callable function (NumPy-compatible)
 #
 # OUTPUTS: 
-#         ·integral : integral aproximation
+#         ·integral  : integral aproximation
 #=================================================================
 
 import numpy as np

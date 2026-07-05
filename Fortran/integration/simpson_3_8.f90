@@ -20,7 +20,7 @@
 !         ·integral : integral aproximation
 !=================================================================
 
-SUBROUTINE SIMPSON38(a,b,k,fun,integral)
+subroutine simpson_3_8(a, b, k, fun, integral)
 
     implicit none
 
@@ -67,6 +67,6 @@ SUBROUTINE SIMPSON38(a,b,k,fun,integral)
     ! Integral estimation
     integral = sum*(3.0d0*h/8.0d0)
 
-    RETURN
+    return
 
-END SUBROUTINE SIMPSON38
+end subroutine simpson_3_8

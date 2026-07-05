@@ -19,7 +19,7 @@
 !         ·xgaus : array containing the generated Gaussian numbers N(0,1)
 !=================================================================
 
-SUBROUTINE SUBGAUSS(ndat,xgaus)
+subroutine gauss(ndat, xgaus)
 
     implicit none
 
@@ -57,6 +57,6 @@ SUBROUTINE SUBGAUSS(ndat,xgaus)
 
     enddo
 
-    RETURN
+    return
 
-END SUBROUTINE SUBGAUSS
+end subroutine gauss

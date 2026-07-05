@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Integrating f(x) in N-Dimensions using the Monte Carlo 

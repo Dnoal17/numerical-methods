@@ -12,9 +12,9 @@
 # ERROR: O(h^2), where h is the step size
 #
 # INPUTS:
-#         ·a, b   : interval endpoints
-#         ·k      : determines number of subintervals (N = 2^k)
-#         ·fun    : 1 variable - callable function (NumPy-compatible)
+#         ·a, b     : interval endpoints
+#         ·k        : determines number of subintervals (N = 2^k)
+#         ·fun      : 1 variable - callable function (NumPy-compatible)
 #
 # OUTPUT:
 #         ·integral : approximation of the integral

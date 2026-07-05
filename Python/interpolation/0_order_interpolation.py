@@ -10,8 +10,8 @@
 #             {(xi,fi)}
 #                       
 # INPUTS:
-#         ·X,Fi : two arrays containing the points such that f(Xi) = Fi, where Xi must be sorted
-#         ·x    : the point where f(x) is to be interpolated
+#         ·X,Fi   : two arrays containing the points such that f(Xi) = Fi, where Xi must be sorted
+#         ·x      : the point where f(x) is to be interpolated
 #
 # OUTPUTS: 
 #         ·f(x)   : 0 order interpolation of f at point x

@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Finding a root of f(x) = 0 using the Newton-Raphson
@@ -14,13 +14,13 @@
 # CONVERGENCE ORDER: Quadratic convergence near the root
 #                       
 # INPUTS:
-#         ·x0       : the point where the iteration begins
-#         ·fun      : 1D variable - callable function with output (f(x),f'(x)) in a tuple
-#         ·max_iter : maximum number of iterations permited
-#         ·er_bound : desired error bound
+#         ·x0        : the point where the iteration begins
+#         ·fun       : 1D variable - callable function with output (f(x),f'(x)) in a tuple
+#         ·max_iter  : maximum number of iterations permited
+#         ·er_bound  : desired error bound
 #
 # OUTPUTS: 
-#         ·root     : estimated root within the error range
+#         ·root      : estimated root within the error range
 #         ·n_iter    : number of iterations needed
 #=================================================================
 

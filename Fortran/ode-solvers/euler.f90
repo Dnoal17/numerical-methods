@@ -22,7 +22,7 @@
 !         ·y    : solution array (updated with the numerical solution)
 !=================================================================
 
-SUBROUTINE EULER_METHOD(N, y, fun, a, b, nvar)
+subroutine euler_method(N, y, fun, a, b, nvar)
 
     implicit none
 
@@ -55,6 +55,6 @@ SUBROUTINE EULER_METHOD(N, y, fun, a, b, nvar)
 
     end do
 
-    RETURN
+    return
 
-END SUBROUTINE EULER_METHOD
+end subroutine euler_method

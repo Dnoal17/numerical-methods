@@ -24,9 +24,9 @@
 !         ·y_out: output state vector after time dt
 !=================================================================
 
-SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, y_out)
+subroutine RK4(t, dt, yyin, nequs, y_out)
 
-    IMPLICIT NONE
+    implicit none
 
     ! Inputs
     integer, intent(in) :: nequs
@@ -70,6 +70,6 @@ SUBROUTINE MIRUNGEKUTTA4(t, dt, yyin, nequs, y_out)
         y_out(i) = yyin(i) + (dt*(K(i,1)+2*K(i,2)+2*K(i,3)+K(i,4)))/6.0d0
     end do
 
-    RETURN
+    return
 
-END SUBROUTINE MIRUNGEKUTTA4
+end subroutine RK4

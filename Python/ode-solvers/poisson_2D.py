@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Solve the Heat Equation (2D Poisson equation) using Jacobi, 

@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Integrating f(x) in N-dimensional interval through 
@@ -16,13 +16,13 @@
 #        are, the more efficient the method will be.
 #
 # INPUTS:
-#         ·fun     : n-D function to be integrated - callable function (NumPy-compatible)
-#         ·density : n-D probability density function - callable function (NumPy-compatible)
-#         ·nums    : matrix containing the random numbers (N * dim)
+#         ·fun       : n-D function to be integrated - callable function (NumPy-compatible)
+#         ·density   : n-D probability density function - callable function (NumPy-compatible)
+#         ·nums      : matrix containing the random numbers (N * dim)
 #
 # OUTPUTS: 
-#         ·integral : integral approximation
-#         ·error    : error estimation
+#         ·integral  : integral approximation
+#         ·error     : error estimation
 #=================================================================
 
 import numpy as np

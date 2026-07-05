@@ -20,7 +20,7 @@
 !         ·integral : integral aproximation
 !=================================================================
 
-SUBROUTINE TRAPEZOIDAL(a,b,k,fun,integral)
+subroutine trapezoidal(a, b, k, fun, integral)
 
     implicit none
 
@@ -63,6 +63,6 @@ SUBROUTINE TRAPEZOIDAL(a,b,k,fun,integral)
     ! Integral estimation
     integral = sum*h
 
-    RETURN
+    return
 
-END SUBROUTINE TRAPEZOIDAL
+end subroutine TRAPEZOIDAL

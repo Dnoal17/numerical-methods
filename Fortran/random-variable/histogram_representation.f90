@@ -20,7 +20,7 @@
 !         ·errhisto : estimated error of each bin
 !=================================================================
 
-SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
+subroutine histogram(ndat,xdata,nbox,xhisto,histo,errhisto)
 
     implicit none
 
@@ -79,6 +79,6 @@ SUBROUTINE HISTOGRAM(ndat,xdata,nbox,xhisto,histo,errhisto)
 
     enddo
 
-    RETURN
+    return
 
-END SUBROUTINE HISTOGRAMA
+end subroutine histogram

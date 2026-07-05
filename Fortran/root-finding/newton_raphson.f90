@@ -24,7 +24,7 @@
 !         ·niter    : number of iterations needed
 !=================================================================
 
-SUBROUTINE NEWTONRAP(x0,er_bound,fun,niter,root,maxiter)
+subroutine newtonrap(x0,er_bound,fun,niter,root,maxiter)
 
     implicit none
 
@@ -84,6 +84,6 @@ SUBROUTINE NEWTONRAP(x0,er_bound,fun,niter,root,maxiter)
         write(*,*) "ERROR: Maximum number of iterations reached"
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE NEWTONRAP
+end subroutine newtonrap

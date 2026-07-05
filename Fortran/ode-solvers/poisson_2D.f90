@@ -30,14 +30,14 @@
 !         ·conv_p       : convergence vector at the monitoring point
 !=================================================================
 
-SUBROUTINE SOLVER_POISSON_2D(icontrol,t_cinitials,T_final,p,Lx,Ly,h,i_point,j_point,conv_p,omega,unit_file)
+subroutine solver_poisson_2D(icontrol, t_cinitials, T_final, p, h, i_point, j_point, conv_p, omega, unit_file)
 
     implicit none
 
     ! Inputs
     integer, intent(in) :: icontrol, i_point, j_point, unit_file
     double precisionn, intent(in) :: t_cinitials(:,:), p(:,:)
-    double precisionn, intent(in) :: Lx, Ly, h, omega
+    double precisionn, intent(in) :: h, omega
 
     ! Outputs
     double precisionn, intent(out) :: T_final(:,:), conv_p(:)
@@ -155,6 +155,6 @@ SUBROUTINE SOLVER_POISSON_2D(icontrol,t_cinitials,T_final,p,Lx,Ly,h,i_point,j_po
     
     deallocate(T_k, T_k_plus_1)
 
-    RETURN
+    return
 
-END SUBROUTINE SOLVER_POISSON_2D
+end subroutine solver_poisson_2D

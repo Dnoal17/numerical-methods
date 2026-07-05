@@ -3,7 +3,7 @@
 #=================================================================
 # Author: Daniel Noal Pineda
 # Email : noaldaniel41@gmail.com
-# Date  : 2025
+# Date  : 2026
 # Repository: https://github.com/Dnoal17/numerical-methods.git
 #=================================================================
 # OBJECTIVES: Finding a root of f(x) = 0 in the interval [A,B] 
@@ -15,12 +15,12 @@
 #                    number of iterations as: error <= (B-A)/2^n
 #                       
 # INPUTS:
-#         ·A,B      : the points that define the integration interval
-#         ·fun      : 1 variable - callable function 
-#         ·er_bound : desired error bound
+#         ·A,B       : the points that define the integration interval
+#         ·fun       : 1 variable - callable function 
+#         ·er_bound  : desired error bound
 #
 # OUTPUTS: 
-#         ·root     : estimated root within the error bound
+#         ·root      : estimated root within the error bound
 #         ·n_iter    : number of iterations needed
 #=================================================================
 import numpy as np

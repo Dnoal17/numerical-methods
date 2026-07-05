@@ -22,7 +22,7 @@
 !         ·error    : error estimation
 !=================================================================
 
-SUBROUTINE CRUDE_MONTECARLO(dim,N,fun,a,b,integral,error)
+subroutine crude_montecarlo(dim, N, fun, a, b, integral, error)
 
     implicit none
 
@@ -86,4 +86,4 @@ SUBROUTINE CRUDE_MONTECARLO(dim,N,fun,a,b,integral,error)
     ! Error of the Monte Carlo method: σ/√N multiplied by the domain volume
     error = (lambda * sigma) / dsqrt(dble(N))
 
-END SUBROUTINE CRUDE_MONTECARLO
+end subroutine crude_montecarlo

@@ -24,7 +24,7 @@
 !         ·n_iter    : number of iterations needed
 !=================================================================
 
-SUBROUTINE BISECTION(A,B,er_bound,fun,n_iter,root)
+subroutine bisection(A, B, er_bound, fun, n_iter, root)
 
     implicit none
 
@@ -94,6 +94,6 @@ SUBROUTINE BISECTION(A,B,er_bound,fun,n_iter,root)
             root = C
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE BISECTION
+end subroutine bisection

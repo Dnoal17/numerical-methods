@@ -24,7 +24,7 @@
 !=================================================================
 
 
-SUBROUTINE SECANT(x0,x1,er_bound,fun,niter,root,maxiter)
+subroutine secant(x0, x1, er_bound, fun, niter, root, maxiter)
 
     implicit none
     
@@ -87,6 +87,6 @@ SUBROUTINE SECANT(x0,x1,er_bound,fun,niter,root,maxiter)
         write(*,*) "ERROR: Maximum number of iterations was reached without achieving the error bound"
     endif
 
-    RETURN
+    return
 
-END SUBROUTINE SECANT
+end subroutine secant
